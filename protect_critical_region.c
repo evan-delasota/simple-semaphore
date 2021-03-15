@@ -20,17 +20,17 @@ void* protect_critical_region(void* n) {
     
 
     while (!finished) {
-        sem_wait(&mutex2);
+        sem_wait(&mutex);
         for (int j = 0; j < thread_num; ++j) { printf("\t\t\t"); }
         printf("CRITICAL(T%d)\n", thread_num);
-        sem_post(&mutex2);
+        sem_post(&mutex);
 
         sleep(2);
 
-        sem_wait(&mutex);
+        sem_wait(&mutex2);
         for (int j = 0; j < thread_num; ++j) { printf("\t\t\t"); }
         printf("out of CRITICAL(T%d)\n", thread_num);
-        sem_post(&mutex);
+        sem_post(&mutex2);
 
         finished = i++ > 3;
 
